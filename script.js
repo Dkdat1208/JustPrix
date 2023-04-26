@@ -1,20 +1,44 @@
-// Etape 1 - Sélectionner nos éléments
+// Etape 1 - Sélectionner les éléments
 let  formulaire     = document.querySelector('#formulaire');
 let  input    = document.querySelector('#prix');
-//let  btn      = document.querySelector('button');
 let  error    = document.querySelector('small');
 
 
 // Etape 2 - Cacher l'erreur
-
 error.style.display = "none";
 
 // Etape 3 - Générer un nombre aléatoire
-
 var  randomNumber  =   Math.floor(Math.random() * 1001);
 let  coups         = 0 ;
 let  nombreChoisi ;
 console.log('random number ' + randomNumber);
+
+
+// Etape 4 - Vérifier que l'utilisateur donne bien un nombre
+input.addEventListener('keyup', () => {
+     if(isNaN(input.value)){
+      error.style.display = "inline";
+
+     }else{
+      error.style.display = "none";
+     }
+});
+// Etape 5 - Agir à l'envoi du formulaire
+formulaire.addEventListener('submit' , (e) =>{
+     e.preventDefault(); //annule par defaut l'évenement du formulaire
+
+     if(input.value == '' || isNaN(input.value) ){
+         input.style.borderColor = "red";
+     }else{
+          coups ++ ;
+          input.style.borderColor = "silver";
+          nombreChoisi =  input.value ;
+          input.value =  '';
+          verifier(nombreChoisi);
+
+     }
+
+});
 
 // Etape 6 - Créer la fonction vérifier
 function verifier(nombre){
@@ -41,40 +65,7 @@ function verifier(nombre){
 
      }
 
-     //ajouter l'élémént
+     //ajouter l'élément à la page
      document.querySelector("#instructions").prepend(instruction);
-
-
-
-     
 }
-
-// Etape 4 - Vérifier que l'utilisateur donne bien un nombre
-input.addEventListener('keyup', () => {
-     if(isNaN(input.value)){
-      error.style.display = "inline";
-
-     }else{
-      error.style.display = "none";
-     }
-});
-// Etape 5 - Agir à l'envoi du formulaire
-
-formulaire.addEventListener('submit' , (e) =>{
-     e.preventDefault(); //annul par defaut l'evenement du formulaire
-
-     if(input.value == '' || isNaN(input.value) ){
-         input.style.borderColor = "red";
-     }else{
-          coups ++ ;
-          input.style.borderColor = "silver";
-          nombreChoisi =  input.value ;
-          input.value =  '';
-          verifier(nombreChoisi);
-
-     }
-
-
-
-});
 
